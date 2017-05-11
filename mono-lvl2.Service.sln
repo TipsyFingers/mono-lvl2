@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mono-lvl2.Service", "mono-lvl2.Service\mono-lvl2.Service.csproj", "{932C181F-6611-472B-837E-FEAB67F5B7B1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mono-lvl2.MVC", "mono-lvl2.MVC\mono-lvl2.MVC.csproj", "{95295079-0243-407C-B5EB-7D6B14A31472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mono-lvl2.Service", "mono-lvl2.Service\mono-lvl2.Service.csproj", "{1F1D1D46-6DEA-441F-B5BF-640F674DB795}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{932C181F-6611-472B-837E-FEAB67F5B7B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{932C181F-6611-472B-837E-FEAB67F5B7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{932C181F-6611-472B-837E-FEAB67F5B7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{932C181F-6611-472B-837E-FEAB67F5B7B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{95295079-0243-407C-B5EB-7D6B14A31472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{95295079-0243-407C-B5EB-7D6B14A31472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95295079-0243-407C-B5EB-7D6B14A31472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95295079-0243-407C-B5EB-7D6B14A31472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1D1D46-6DEA-441F-B5BF-640F674DB795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1D1D46-6DEA-441F-B5BF-640F674DB795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1D1D46-6DEA-441F-B5BF-640F674DB795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1D1D46-6DEA-441F-B5BF-640F674DB795}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
