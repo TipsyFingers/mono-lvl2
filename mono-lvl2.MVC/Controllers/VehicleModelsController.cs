@@ -12,7 +12,7 @@ namespace mono_lvl2.MVC.Controllers
 {
     public class VehicleModelsController : Controller
     {
-        private dbCont db = new dbCont();
+        private DbCont db = new DbCont();
 
         // GET: VehicleModels
         public ActionResult Index()
@@ -38,7 +38,7 @@ namespace mono_lvl2.MVC.Controllers
         // GET: VehicleModels/Create
         public ActionResult Create()
         {
-            dbCont myEntities = new dbCont();
+            DbCont myEntities = new DbCont();
             var getmakes = myEntities.MakeSet.ToList();
             SelectList list = new SelectList(getmakes, "Id", "Name");
             ViewBag.makenames = list;
@@ -71,6 +71,12 @@ namespace mono_lvl2.MVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VehicleModel vehicleModel = db.ModelSet.Find(id);
+
+            DbCont myEntities = new DbCont();
+            var getmakes = myEntities.MakeSet.ToList();
+            SelectList list = new SelectList(getmakes, "Id", "Name");
+            ViewBag.makenames = list;
+
             if (vehicleModel == null)
             {
                 return HttpNotFound();

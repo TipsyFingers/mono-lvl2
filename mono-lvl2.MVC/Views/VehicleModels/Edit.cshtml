@@ -34,12 +34,13 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MakeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Model maker name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MakeID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("MakeID", ViewBag.makenames as SelectList, "Please select model maker", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MakeID, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
