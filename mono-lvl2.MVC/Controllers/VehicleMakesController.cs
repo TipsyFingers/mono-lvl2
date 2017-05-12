@@ -12,7 +12,7 @@ namespace mono_lvl2.MVC.Controllers
 {
     public class VehicleMakesController : Controller
     {
-        private MakeModel db = new MakeModel();
+        private dbCont db = new dbCont();
 
         // GET: VehicleMakes
         public ActionResult Index()

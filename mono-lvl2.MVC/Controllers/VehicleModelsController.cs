@@ -12,7 +12,7 @@ namespace mono_lvl2.MVC.Controllers
 {
     public class VehicleModelsController : Controller
     {
-        private ModelModel db = new ModelModel();
+        private dbCont db = new dbCont();
 
         // GET: VehicleModels
         public ActionResult Index()
@@ -38,7 +38,7 @@ namespace mono_lvl2.MVC.Controllers
         // GET: VehicleModels/Create
         public ActionResult Create()
         {
-            MakeModel myEntities = new MakeModel();
+            dbCont myEntities = new dbCont();
             var getmakes = myEntities.MakeSet.ToList();
             SelectList list = new SelectList(getmakes, "Id", "Name");
             ViewBag.makenames = list;
