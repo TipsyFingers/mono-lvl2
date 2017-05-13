@@ -1,4 +1,4 @@
-﻿@model mono_lvl2.Service.VehicleModel
+﻿@model mono_lvl2.Service.ViewModels.VehicleModelViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>VehicleModel</h4>
+    <h4>VehicleModelViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,11 +27,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MakeID)
+            @Html.DisplayNameFor(model => model.MakerID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MakeID)
+            @Html.DisplayFor(model => model.MakerID)
         </dd>
 
     </dl>
