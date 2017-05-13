@@ -27,89 +27,87 @@ namespace mono_lvl2.MVC.Controllers
             return View();
         }
 
-        //jos ne radi
+        // POST: VehicleMake/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                VehicleService.AddMake(vehicleMakeViewModel);
+                return RedirectToAction("Index");
+            }
 
-        //// POST: VehicleMake/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        VehicleService.AddMake(vehicleMakeViewModel);
-        //        return RedirectToAction("Index");
-        //    }
+            return View(vehicleMakeViewModel);
+        }
 
-        //    return View(vehicleMakeViewModel);
-        //}
+        // GET: VehicleMake/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VehicleMakeViewModel vehicleMakeViewModel = VehicleService.GetMake(id);
 
-        //// GET: VehicleMake/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VehicleMakeViewModel vehicleMakeViewModel = VehicleService.GetMake(id);
+            if (vehicleMakeViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vehicleMakeViewModel);
+        }
 
-        //    if (vehicleMakeViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vehicleMakeViewModel);
-        //}
+        // GET: VehicleMake/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VehicleMakeViewModel vehicleMakeViewModel = VehicleService.GetMake(id);
+            if (vehicleMakeViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vehicleMakeViewModel);
+        }
 
-        //// GET: VehicleMake/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VehicleMakeViewModel vehicleMakeViewModel = VehicleService.GetMake(id);
-        //    if (vehicleMakeViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vehicleMakeViewModel);
-        //}
+        // POST: VehicleMake/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            VehicleService.RemoveMake(id);
+            return RedirectToAction("Index");
+        }
 
-        //// POST: VehicleMake/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    VehicleService.RemoveMake(id);
-        //    return RedirectToAction("Index");
-        //}
+        // GET: VehicleMake/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VehicleMakeViewModel vehicleMakeViewModel = db.VehicleMakeViewModels.Find(id);
+            if (vehicleMakeViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vehicleMakeViewModel);
+        }
 
-        //// GET: VehicleMake/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VehicleMakeViewModel vehicleMakeViewModel = db.VehicleMakeViewModels.Find(id);
-        //    if (vehicleMakeViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vehicleMakeViewModel);
-        //}
-
-        //// POST: VehicleMake/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(vehicleMakeViewModel).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(vehicleMakeViewModel);
-        //}
+        // POST: VehicleMake/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(vehicleMakeViewModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(vehicleMakeViewModel);
+        }
     }
 }

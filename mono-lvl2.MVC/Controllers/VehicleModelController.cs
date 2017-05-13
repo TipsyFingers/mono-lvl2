@@ -26,60 +26,62 @@ namespace mono_lvl2.MVC.Controllers
         {
             return View();
         }
+        
+        // Jos ne radi
 
-        // POST: VehicleModel/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Abrv,MakerID")] VehicleModelViewModel vehicleModelViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                VehicleService.AddModel(vehicleModelViewModel);
-                return RedirectToAction("Index");
-            }
+        //// POST: VehicleModel/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,Name,Abrv,MakerID")] VehicleModelViewModel vehicleModelViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        VehicleService.AddModel(vehicleModelViewModel);
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(vehicleModelViewModel);
-        }
+        //    return View(vehicleModelViewModel);
+        //}
 
-        // GET: VehicleModel/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VehicleModelViewModel vehicleModelViewModel = VehicleService.GetModel(id);
+        //// GET: VehicleModel/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    VehicleModelViewModel vehicleModelViewModel = VehicleService.GetModel(id);
 
-            if (vehicleModelViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vehicleModelViewModel);
-        }
+        //    if (vehicleModelViewModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(vehicleModelViewModel);
+        //}
 
-        // GET: VehicleModel/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VehicleModelViewModel vehicleModelViewModel = VehicleService.GetModel(id);
-            if (vehicleModelViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vehicleModelViewModel);
-        }
+        //// GET: VehicleModel/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    VehicleModelViewModel vehicleModelViewModel = VehicleService.GetModel(id);
+        //    if (vehicleModelViewModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(vehicleModelViewModel);
+        //}
 
-        // POST: VehicleModel/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            VehicleService.RemoveModel(id);
-            return RedirectToAction("Index");
-        }
+        //// POST: VehicleModel/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    VehicleService.RemoveModel(id);
+        //    return RedirectToAction("Index");
+        //}
 
         //// GET: VehicleModel/Edit/5
         //public ActionResult Edit(int? id)
