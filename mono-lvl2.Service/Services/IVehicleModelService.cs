@@ -11,7 +11,7 @@ namespace mono_lvl2.Service.Services
         VehicleModelViewModel Get(Guid? id);
         IEnumerable<VehicleModelViewModel> GetAll();
         void Add(VehicleModelViewModel modelVM);
-        VehicleModelViewModel Edit(Guid? id, VehicleModelViewModel makeVM);
+        VehicleModelViewModel Edit(VehicleModelViewModel makeVM);
         void Remove(Guid? id);
     }
 }

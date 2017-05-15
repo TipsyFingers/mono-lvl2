@@ -11,6 +11,6 @@ namespace mono_lvl2.Service
         public Guid MakeID { get; set; }
 
         [ForeignKey("MakeID")]
-        public virtual VehicleMake Maker { get; set; }
+        public virtual VehicleMakeViewModel Maker { get; set; }
     }
 }

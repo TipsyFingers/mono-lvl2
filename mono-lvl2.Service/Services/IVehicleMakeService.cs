@@ -12,7 +12,7 @@ namespace mono_lvl2.Service
         VehicleMakeViewModel Get(Guid? id);
         IEnumerable<VehicleMakeViewModel> GetAll();
         void Add(VehicleMakeViewModel makeVM);
-        VehicleMakeViewModel Edit(Guid? id, VehicleMakeViewModel makeVM);
+        VehicleMakeViewModel Edit(VehicleMakeViewModel makeVM);
         void Remove(Guid? id);
     }
 }

@@ -1,125 +1,79 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using mono_lvl2.Service;
+using mono_lvl2.Service.Services;
 using mono_lvl2.Service.ViewModels;
 
 namespace mono_lvl2.MVC.Controllers
 {
     public class VehicleModelController : Controller
     {
+        private VehicleModelService _service = new VehicleModelService();
+
         // GET: VehicleModel
         public ActionResult Index()
         {
-            return View(VehicleService.GetModelsList());
+            return View(_service.GetAll());
+        }
+
+        // GET: VehicleModel/Details/5
+        public ActionResult Details(Guid? id)
+        {
+            return View(_service.Get(id));
         }
 
         // GET: VehicleModel/Create
         public ActionResult Create()
         {
-            var makes = VehicleService.GetMakesList().ToList();
-            SelectList list = new SelectList(makes, "Id", "Name");
-            ViewBag.makelist = list;
             return View();
         }
-
-        // Jos ne radi
 
         // POST: VehicleModel/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Abrv,MakeID")] VehicleModelViewModel vehicleModelViewModel)
+        public ActionResult Create([Bind(Include = "Id,Name,Abrv,Maker")] VehicleModelViewModel vehicleModelViewModel)
         {
             if (ModelState.IsValid)
             {
-                VehicleService.AddModel(vehicleModelViewModel);
+                vehicleModelViewModel.Id = Guid.NewGuid();
+                _service.Add(vehicleModelViewModel);
                 return RedirectToAction("Index");
             }
 
             return View(vehicleModelViewModel);
         }
 
-        //// GET: VehicleModel/Details/5
-        //public ActionResult Details(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VehicleModelViewModel vehicleModelViewModel = VehicleService.GetModel(id);
+        // GET: VehicleModel/Edit/5
+        public ActionResult Edit(Guid? id)
+        {
+            return View(_service.Get(id));
+        }
 
-        //    if (vehicleModelViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vehicleModelViewModel);
-        //}
+        // POST: VehicleModel/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Abrv,Maker")] VehicleModelViewModel vehicleModelViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.Edit(vehicleModelViewModel);
+                return RedirectToAction("Index");
+            }
+            return View(vehicleModelViewModel);
+        }
 
-        //// GET: VehicleModel/Delete/5
-        //public ActionResult Delete(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VehicleModelViewModel vehicleModelViewModel = VehicleService.GetModel(id);
-        //    if (vehicleModelViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vehicleModelViewModel);
-        //}
+        // GET: VehicleModel/Delete/5
+        public ActionResult Delete(Guid? id)
+        {
+            return View(_service.Get(id));
+        }
 
-        //// POST: VehicleModel/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(Guid id)
-        //{
-        //    VehicleService.RemoveModel(id);
-        //    return RedirectToAction("Index");
-        //}
-
-        //// GET: VehicleModel/Edit/5
-        //public ActionResult Edit(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    VehicleModelViewModel vehicleModelViewModel = db.VehicleModelViewModels.Find(id);
-        //    if (vehicleModelViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(vehicleModelViewModel);
-        //}
-
-        //// POST: VehicleModel/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,Name,Abrv,MakerID")] VehicleModelViewModel vehicleModelViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(vehicleModelViewModel).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(vehicleModelViewModel);
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        // POST: VehicleModel/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(Guid id)
+        {
+            _service.Remove(id);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace mono_lvl2.Service
                 throw new ArgumentNullException("Id is null");
             }
 
-            VehicleMake vehicleMake = _db.VehicleMake.Where(m => m.Id == id).FirstOrDefault();
+            VehicleMakeViewModel vehicleMake = _db.VehicleMake.Where(m => m.Id == id).FirstOrDefault();
 
             if(vehicleMake == null)
             {
@@ -36,7 +36,7 @@ namespace mono_lvl2.Service
         public IEnumerable<VehicleMakeViewModel> GetAll()
         {
             List<VehicleMakeViewModel> makeList = new List<VehicleMakeViewModel>();
-            IEnumerable<VehicleMake> data = _db.VehicleMake.ToList();
+            IEnumerable<VehicleMakeViewModel> data = _db.VehicleMake.ToList();
 
             Mapper.Map(data, makeList);
 
@@ -45,7 +45,7 @@ namespace mono_lvl2.Service
 
         public void Add(VehicleMakeViewModel makeVM)
         {
-            VehicleMake make = new VehicleMake();
+            VehicleMakeViewModel make = new VehicleMakeViewModel();
 
             Mapper.Map(makeVM, make);
 
@@ -53,14 +53,14 @@ namespace mono_lvl2.Service
             _db.SaveChanges();
         }
 
-        public VehicleMakeViewModel Edit(Guid? id, VehicleMakeViewModel makeVM)
+        public VehicleMakeViewModel Edit(VehicleMakeViewModel makeVM)
         {
-            if(id == null)
+            if(makeVM == null)
             {
                 throw new ArgumentNullException("Id is null");
             }
 
-            VehicleMake make = _db.VehicleMake.Where(m => m.Id == id).FirstOrDefault();
+            VehicleMakeViewModel make = _db.VehicleMake.Where(m => m.Id == makeVM.Id).FirstOrDefault();
 
             if (make == null)
             {
@@ -84,6 +84,7 @@ namespace mono_lvl2.Service
             }
 
             _db.VehicleMake.Remove(_db.VehicleMake.Where(m => m.Id == id).FirstOrDefault());
+            _db.SaveChanges();
         }
     }
 }

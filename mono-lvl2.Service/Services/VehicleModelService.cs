@@ -53,14 +53,14 @@ namespace mono_lvl2.Service.Services
             _db.SaveChanges();
         }
 
-        public VehicleModelViewModel Edit(Guid? id, VehicleModelViewModel modelVM)
+        public VehicleModelViewModel Edit(VehicleModelViewModel modelVM)
         {
-            if (id == null)
+            if (modelVM.Id == null)
             {
                 throw new ArgumentNullException("Id is null");
             }
 
-            VehicleModel model = _db.VehicleModel.Where(m => m.Id == id).FirstOrDefault();
+            VehicleModel model = _db.VehicleModel.Where(m => m.Id == modelVM.Id).FirstOrDefault();
 
             if (model == null)
             {

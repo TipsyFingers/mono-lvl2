@@ -17,7 +17,7 @@ namespace mono_lvl2.MVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Mapper.Initialize(configuration => {
-                configuration.CreateMap<VehicleMake, VehicleMakeViewModel>().ReverseMap();
+                configuration.CreateMap<VehicleMakeViewModel, VehicleMakeViewModel>().ReverseMap();
                 configuration.CreateMap<VehicleModel, VehicleModelViewModel>().ReverseMap();
             });
         }
