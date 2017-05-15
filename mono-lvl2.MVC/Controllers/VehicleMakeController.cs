@@ -42,7 +42,7 @@ namespace mono_lvl2.MVC.Controllers
         }
 
         // GET: VehicleMake/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
@@ -58,7 +58,7 @@ namespace mono_lvl2.MVC.Controllers
         }
 
         // GET: VehicleMake/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
@@ -75,14 +75,14 @@ namespace mono_lvl2.MVC.Controllers
         // POST: VehicleMake/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
             VehicleService.RemoveMake(id);
             return RedirectToAction("Index");
         }
 
         //// GET: VehicleMake/Edit/5
-        //public ActionResult Edit(int? id)
+        //public ActionResult Edit(Guid? id)
         //{
         //    if (id == null)
         //    {

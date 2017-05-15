@@ -8,8 +8,7 @@ namespace mono_lvl2.Service.ViewModels
 {
     public class VehicleMakeViewModel
     {
-        [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Please enter maker name!")]
         public string Name { get; set; }

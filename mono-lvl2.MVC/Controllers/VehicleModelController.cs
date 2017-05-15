@@ -45,7 +45,7 @@ namespace mono_lvl2.MVC.Controllers
         }
 
         //// GET: VehicleModel/Details/5
-        //public ActionResult Details(int? id)
+        //public ActionResult Details(Guid? id)
         //{
         //    if (id == null)
         //    {
@@ -61,7 +61,7 @@ namespace mono_lvl2.MVC.Controllers
         //}
 
         //// GET: VehicleModel/Delete/5
-        //public ActionResult Delete(int? id)
+        //public ActionResult Delete(Guid? id)
         //{
         //    if (id == null)
         //    {
@@ -78,14 +78,14 @@ namespace mono_lvl2.MVC.Controllers
         //// POST: VehicleModel/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
+        //public ActionResult DeleteConfirmed(Guid id)
         //{
         //    VehicleService.RemoveModel(id);
         //    return RedirectToAction("Index");
         //}
 
         //// GET: VehicleModel/Edit/5
-        //public ActionResult Edit(int? id)
+        //public ActionResult Edit(Guid? id)
         //{
         //    if (id == null)
         //    {

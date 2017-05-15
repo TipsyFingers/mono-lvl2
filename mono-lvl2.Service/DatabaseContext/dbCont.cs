@@ -10,7 +10,7 @@ namespace mono_lvl2.Service
     {
         public DbCont() : base("name=db.lvl2") { }
 
-        public virtual DbSet<VehicleModel> ModelSet { get; set; }
-        public virtual DbSet<VehicleMake> MakeSet { get; set; }
+        public virtual DbSet<VehicleModel> VehicleModel { get; set; }
+        public virtual DbSet<VehicleMake> VehicleMake { get; set; }
     }
 }

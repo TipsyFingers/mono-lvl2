@@ -8,13 +8,12 @@ namespace mono_lvl2.Service.ViewModels
 {
     public class VehicleModelViewModel
     {
-        [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Please enter model name!")]
         public string Name { get; set; }
 
         public string Abrv { get; set; }
-        public int MakeID { get; set; }
+        public Guid MakeID { get; set; }
     }
 }
