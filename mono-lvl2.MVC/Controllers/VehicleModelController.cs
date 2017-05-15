@@ -13,8 +13,6 @@ namespace mono_lvl2.MVC.Controllers
 {
     public class VehicleModelController : Controller
     {
-        private DbCont db = new DbCont();
-
         // GET: VehicleModel
         public ActionResult Index()
         {
@@ -24,24 +22,27 @@ namespace mono_lvl2.MVC.Controllers
         // GET: VehicleModel/Create
         public ActionResult Create()
         {
+            var makes = VehicleService.GetMakesList().ToList();
+            SelectList list = new SelectList(makes, "Id", "Name");
+            ViewBag.makelist = list;
             return View();
         }
-        
+
         // Jos ne radi
 
-        //// POST: VehicleModel/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,Name,Abrv,MakerID")] VehicleModelViewModel vehicleModelViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        VehicleService.AddModel(vehicleModelViewModel);
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: VehicleModel/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name,Abrv,MakeID")] VehicleModelViewModel vehicleModelViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                VehicleService.AddModel(vehicleModelViewModel);
+                return RedirectToAction("Index");
+            }
 
-        //    return View(vehicleModelViewModel);
-        //}
+            return View(vehicleModelViewModel);
+        }
 
         //// GET: VehicleModel/Details/5
         //public ActionResult Details(int? id)

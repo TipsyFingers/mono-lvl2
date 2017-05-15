@@ -7,11 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mono-lvl2.MVC", "mono-lvl2.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mono-lvl2.Service", "mono-lvl2.Service\mono-lvl2.Service.csproj", "{1F1D1D46-6DEA-441F-B5BF-640F674DB795}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB066BBA-FD77-440B-AE67-574238EBC398}"
-	ProjectSection(SolutionItems) = preProject
-		spremljeno.txt = spremljeno.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

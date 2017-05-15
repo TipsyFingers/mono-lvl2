@@ -57,6 +57,17 @@ namespace mono_lvl2.Service
                 return null;
         }
 
+        //public static void EditMake(int? id)
+        //{
+        //    DbCont db = new DbCont();
+        //    VehicleMake make = new VehicleMake();
+
+        //    if (db.MakeSet.Any(m => m.Id == id))
+        //    {
+        //        make = db.MakeSet.Find(id);
+        //    }
+        //}
+
         public static void RemoveMake(int? id)
         {
             DbCont db = new DbCont();
