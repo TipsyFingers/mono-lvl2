@@ -85,6 +85,7 @@ namespace mono_lvl2.Service.Services
             }
 
             _db.VehicleModel.Remove(_db.VehicleModel.Where(m => m.Id == id).FirstOrDefault());
+            _db.SaveChanges();
         }
     }
 }

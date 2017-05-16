@@ -2,20 +2,31 @@
 
 @{
     ViewBag.Title = "Index";
+    SelectList makes = ViewBag.List;
 }
+
 
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by maker name: @Html.TextBox("searchStr")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name ", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Abrv)
+            @Html.ActionLink("Abrv ", "Index", new { sortOrder = ViewBag.AbrvSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MakeID)

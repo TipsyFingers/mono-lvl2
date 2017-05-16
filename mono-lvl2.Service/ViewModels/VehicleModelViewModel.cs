@@ -16,6 +16,7 @@ namespace mono_lvl2.Service.ViewModels
 
         public string Abrv { get; set; }
         public Guid MakeID { get; set; }
+        public string MakeName { get; set; }
 
         public IEnumerable<VehicleMakeViewModel> Makes { get; set; }
     }
