@@ -1,3 +1,4 @@
+using mono_lvl2.Service.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +12,6 @@ namespace mono_lvl2.Service
         public Guid MakeID { get; set; }
 
         [ForeignKey("MakeID")]
-        public virtual VehicleMakeViewModel Maker { get; set; }
+        public virtual VehicleMake Maker { get; set; }
     }
 }

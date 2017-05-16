@@ -16,8 +16,9 @@ namespace mono_lvl2.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Mapper.Initialize(configuration => {
-                configuration.CreateMap<VehicleMakeViewModel, VehicleMakeViewModel>().ReverseMap();
+            Mapper.Initialize(configuration =>
+            {
+                configuration.CreateMap<VehicleMake, VehicleMakeViewModel>().ReverseMap();
                 configuration.CreateMap<VehicleModel, VehicleModelViewModel>().ReverseMap();
             });
         }

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using mono_lvl2.Service.Services;
 using mono_lvl2.Service.ViewModels;
+using mono_lvl2.Service;
 
 namespace mono_lvl2.MVC.Controllers
 {
@@ -24,13 +25,20 @@ namespace mono_lvl2.MVC.Controllers
         // GET: VehicleModel/Create
         public ActionResult Create()
         {
+            var _service2 = new VehicleMakeService();
+            var makes = _service2.GetAll();
+
+            SelectList list = new SelectList(makes, "Id", "Name");
+
+            ViewBag.list = list;
+
             return View();
         }
 
         // POST: VehicleModel/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Abrv,Maker")] VehicleModelViewModel vehicleModelViewModel)
+        public ActionResult Create([Bind(Include = "Id,Name,Abrv,MakeID")] VehicleModelViewModel vehicleModelViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -51,7 +59,7 @@ namespace mono_lvl2.MVC.Controllers
         // POST: VehicleModel/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Abrv,Maker")] VehicleModelViewModel vehicleModelViewModel)
+        public ActionResult Edit([Bind(Include = "Id,Name,Abrv,MakeID")] VehicleModelViewModel vehicleModelViewModel)
         {
             if (ModelState.IsValid)
             {

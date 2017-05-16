@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
-using mono_lvl2.Service.ViewModels;
 using mono_lvl2.Service;
+using mono_lvl2.Service.ViewModels;
 
 namespace mono_lvl2.MVC.Controllers
 {
@@ -18,7 +24,7 @@ namespace mono_lvl2.MVC.Controllers
         // GET: VehicleMake/Details/5
         public ActionResult Details(Guid? id)
         {
-            
+
             return View(_service.Get(id));
         }
 
@@ -32,11 +38,10 @@ namespace mono_lvl2.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)  //ambiguous
+        public ActionResult Create([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)  
         {
             if (ModelState.IsValid)
             {
-                vehicleMakeViewModel.Id = Guid.NewGuid();
                 _service.Add(vehicleMakeViewModel);
                 return RedirectToAction("Index");
             }
@@ -53,7 +58,7 @@ namespace mono_lvl2.MVC.Controllers
         // POST: VehicleMake/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)  //ambiguous
+        public ActionResult Edit([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)  
         {
             if (ModelState.IsValid)
             {

@@ -48,6 +48,7 @@ namespace mono_lvl2.Service.Services
             VehicleModel model = new VehicleModel();
 
             Mapper.Map(modelVM, model);
+            model.Id = Guid.NewGuid();
 
             _db.VehicleModel.Add(model);
             _db.SaveChanges();

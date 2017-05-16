@@ -18,14 +18,14 @@ namespace mono_lvl2.Service
 
         public VehicleMakeViewModel Get(Guid? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 throw new ArgumentNullException("Id is null");
             }
 
-            VehicleMakeViewModel vehicleMake = _db.VehicleMake.Where(m => m.Id == id).FirstOrDefault();
+            VehicleMake vehicleMake = _db.VehicleMake.Where(m => m.Id == id).FirstOrDefault();
 
-            if(vehicleMake == null)
+            if (vehicleMake == null)
             {
                 throw new ArgumentNullException("Model is null");
             }
@@ -36,7 +36,7 @@ namespace mono_lvl2.Service
         public IEnumerable<VehicleMakeViewModel> GetAll()
         {
             List<VehicleMakeViewModel> makeList = new List<VehicleMakeViewModel>();
-            IEnumerable<VehicleMakeViewModel> data = _db.VehicleMake.ToList();
+            IEnumerable<VehicleMake> data = _db.VehicleMake.ToList();
 
             Mapper.Map(data, makeList);
 
@@ -45,9 +45,10 @@ namespace mono_lvl2.Service
 
         public void Add(VehicleMakeViewModel makeVM)
         {
-            VehicleMakeViewModel make = new VehicleMakeViewModel();
+            VehicleMake make = new VehicleMake();
 
             Mapper.Map(makeVM, make);
+            make.Id = Guid.NewGuid();
 
             _db.VehicleMake.Add(make);
             _db.SaveChanges();
@@ -55,12 +56,12 @@ namespace mono_lvl2.Service
 
         public VehicleMakeViewModel Edit(VehicleMakeViewModel makeVM)
         {
-            if(makeVM == null)
+            if (makeVM == null)
             {
                 throw new ArgumentNullException("Id is null");
             }
 
-            VehicleMakeViewModel make = _db.VehicleMake.Where(m => m.Id == makeVM.Id).FirstOrDefault();
+            VehicleMake make = _db.VehicleMake.Where(m => m.Id == makeVM.Id).FirstOrDefault();
 
             if (make == null)
             {
@@ -78,7 +79,7 @@ namespace mono_lvl2.Service
 
         public void Remove(Guid? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 throw new ArgumentNullException("Id is null");
             }
