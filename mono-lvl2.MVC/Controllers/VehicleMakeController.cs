@@ -22,7 +22,7 @@ namespace mono_lvl2.MVC.Controllers
             ViewBag.AbrvSortParm = sortOrder == "abrv" ? "abrv_desc" : "abrv";
             var makes = from m in _service.GetAll() select m;
 
-            if (!String.IsNullOrEmpty(searchStr))                                           // Filtering
+            if (!String.IsNullOrEmpty(searchStr))                                           
             {
                 makes = makes.Where(m => m.Name.Contains(searchStr));
             }
@@ -60,7 +60,6 @@ namespace mono_lvl2.MVC.Controllers
         }
 
         // POST: VehicleMake/Create
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Abrv")] VehicleMakeViewModel vehicleMakeViewModel)  

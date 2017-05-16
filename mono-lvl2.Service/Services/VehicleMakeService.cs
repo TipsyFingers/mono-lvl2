@@ -35,12 +35,10 @@ namespace mono_lvl2.Service
 
         public IEnumerable<VehicleMakeViewModel> GetAll()
         {
-            List<VehicleMakeViewModel> makeList = new List<VehicleMakeViewModel>();
-            IEnumerable<VehicleMake> data = _db.VehicleMake.ToList();
+            List<VehicleMake> data = _db.VehicleMake.ToList();
+            List<VehicleMakeViewModel> output = Mapper.Map<List<VehicleMake>, List<VehicleMakeViewModel>>(data);
 
-            Mapper.Map(data, makeList);
-
-            return makeList;
+            return output;
         }
 
         public void Add(VehicleMakeViewModel makeVM)

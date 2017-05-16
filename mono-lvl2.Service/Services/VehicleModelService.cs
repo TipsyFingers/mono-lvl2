@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data.Entity.Migrations;
 using mono_lvl2.Service.ViewModels;
 using AutoMapper;
+using System.Data.Entity;
 
 namespace mono_lvl2.Service.Services
 {
@@ -23,7 +24,7 @@ namespace mono_lvl2.Service.Services
                 throw new ArgumentNullException("Id is null");
             }
 
-            VehicleModel vehicleModel = _db.VehicleModel.Where(m => m.Id == id).FirstOrDefault();
+            VehicleModel vehicleModel = _db.VehicleModel.Where(m => m.Id == id).Include(m => m.Make).FirstOrDefault();
 
             if (vehicleModel == null)
             {
@@ -35,12 +36,10 @@ namespace mono_lvl2.Service.Services
 
         public IEnumerable<VehicleModelViewModel> GetAll()
         {
-            List<VehicleModelViewModel> modelList = new List<VehicleModelViewModel>();
-            IEnumerable<VehicleModel> data = _db.VehicleModel.ToList();
+            List<VehicleModel> data = _db.VehicleModel.ToList();
+            List<VehicleModelViewModel> output = Mapper.Map<List<VehicleModel>, List<VehicleModelViewModel>>(data);
 
-            Mapper.Map(data, modelList);
-
-            return modelList;
+            return output;
         }
 
         public void Add(VehicleModelViewModel modelVM)
@@ -48,7 +47,6 @@ namespace mono_lvl2.Service.Services
             VehicleModel model = new VehicleModel();
 
             Mapper.Map(modelVM, model);
-            model.Id = Guid.NewGuid();
 
             _db.VehicleModel.Add(model);
             _db.SaveChanges();
@@ -70,6 +68,7 @@ namespace mono_lvl2.Service.Services
 
             model.Name = modelVM.Name;
             model.Abrv = modelVM.Abrv;
+            model.Make_Id = modelVM.Make_Id;
 
             _db.VehicleModel.AddOrUpdate(model);
             _db.SaveChanges();

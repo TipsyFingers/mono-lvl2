@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     SelectList makes = ViewBag.List;
+    var test = ViewBag.Test;
 }
 
 
@@ -29,12 +30,13 @@
             @Html.ActionLink("Abrv ", "Index", new { sortOrder = ViewBag.AbrvSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MakeID)
+            @Html.ActionLink("Maker ", "Index", new { sortOrder = ViewBag.MakeSortParm })
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
+    
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -43,7 +45,7 @@
             @Html.DisplayFor(modelItem => item.Abrv)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MakeID)
+            @Html.DisplayFor(modelItem => item.Make.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

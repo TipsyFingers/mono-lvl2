@@ -9,9 +9,9 @@ namespace mono_lvl2.Service
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Abrv { get; set; }
-        public Guid MakeID { get; set; }
+        public Guid Make_Id { get; set; }
 
-        [ForeignKey("MakeID")]
-        public virtual VehicleMake Maker { get; set; }
+        [ForeignKey("Make_Id")]
+        public virtual VehicleMake Make { get; set; }
     }
 }

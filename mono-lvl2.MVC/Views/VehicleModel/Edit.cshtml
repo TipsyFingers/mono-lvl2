@@ -35,10 +35,10 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Model maker name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Make, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MakeID", makes as SelectList, "Please select model maker", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MakeID, "", new { @class = "text-danger" })
+                @Html.DropDownList("Make_Id", makes as SelectList, "Please select model maker", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Make_Id, "", new { @class = "text-danger" })
             </div>
         </div>
 

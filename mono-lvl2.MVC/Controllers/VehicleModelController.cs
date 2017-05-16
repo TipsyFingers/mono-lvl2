@@ -18,6 +18,7 @@ namespace mono_lvl2.MVC.Controllers
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AbrvSortParm = sortOrder == "abrv" ? "abrv_desc" : "abrv";
+            ViewBag.MakeSortParm = sortOrder == "make" ? "make_desc" : "make";
             var models = from m in _serviceModel.GetAll() select m;
 
             if (!String.IsNullOrEmpty(searchStr))                                          
@@ -36,12 +37,12 @@ namespace mono_lvl2.MVC.Controllers
                 case "abrv_desc":
                     models = models.OrderByDescending(m => m.Abrv);
                     break;
-                case "maker_desc":
-                    models = models.OrderByDescending(m => m.MakeName);
-                    break;
                 case "maker":
-                    models = models.OrderBy(m => m.MakeName);
+                    models = models.OrderBy(m => m.Make.Name);
                     break;
+                case "maker_desc":
+                    models = models.OrderByDescending(m => m.Make.Name);
+                    break;                
                 default:
                     models = models.OrderBy(m => m.Name);
                     break;
@@ -67,7 +68,7 @@ namespace mono_lvl2.MVC.Controllers
         // POST: VehicleModel/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Abrv,MakeID")] VehicleModelViewModel vehicleModelViewModel)
+        public ActionResult Create([Bind(Include = "Id,Name,Abrv,Make_Id")] VehicleModelViewModel vehicleModelViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +93,7 @@ namespace mono_lvl2.MVC.Controllers
         // POST: VehicleModel/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Abrv,MakeID")] VehicleModelViewModel vehicleModelViewModel)
+        public ActionResult Edit([Bind(Include = "Id,Name,Abrv,Make_Id")] VehicleModelViewModel vehicleModelViewModel)
         {
             if (ModelState.IsValid)
             {
