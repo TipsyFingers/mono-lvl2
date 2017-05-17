@@ -4,7 +4,7 @@ using System.Linq;
 using System.Data.Entity.Migrations;
 using mono_lvl2.Service.ViewModels;
 using AutoMapper;
-
+using PagedList;
 
 namespace mono_lvl2.Service
 {
@@ -106,6 +106,16 @@ namespace mono_lvl2.Service
 
             _db.VehicleMake.Remove(_db.VehicleMake.Where(m => m.Id == id).FirstOrDefault());
             _db.SaveChanges();
+        }
+
+        public IPagedList<VehicleMakeViewModel> PageList(int? page, string searchStr, string currentFilter, string sortOrder)
+        {
+            int pageSize = 3;
+
+            int pageNumber = (page ?? 1);
+            var makes = GetAll(sortOrder, searchStr);
+
+            return makes.ToPagedList(pageNumber, pageSize);
         }
     }
 }

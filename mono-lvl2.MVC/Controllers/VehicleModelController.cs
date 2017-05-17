@@ -18,8 +18,7 @@ namespace mono_lvl2.MVC.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AbrvSortParm = sortOrder == "abrv" ? "abrv_desc" : "abrv";
-            ViewBag.MakeSortParm = sortOrder == "make" ? "make_desc" : "make";
-            var models = _serviceModel.GetAll(sortOrder, searchStr);
+            ViewBag.MakeSortParm = sortOrder == "make" ? "make_desc" : "make";            
 
             if (searchStr != null)
             {
@@ -32,10 +31,7 @@ namespace mono_lvl2.MVC.Controllers
 
             ViewBag.CurrentFilter = searchStr;
 
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-
-            return View(models.ToPagedList(pageNumber, pageSize));
+            return View(_serviceModel.PageList(page, searchStr, currentFilter, sortOrder));
         }
 
         // GET: VehicleModel/Details/5

@@ -5,6 +5,7 @@ using System.Data.Entity.Migrations;
 using mono_lvl2.Service.ViewModels;
 using AutoMapper;
 using System.Data.Entity;
+using PagedList;
 
 namespace mono_lvl2.Service.Services
 {
@@ -112,6 +113,16 @@ namespace mono_lvl2.Service.Services
 
             _db.VehicleModel.Remove(_db.VehicleModel.Where(m => m.Id == id).FirstOrDefault());
             _db.SaveChanges();
+        }
+
+        public IPagedList<VehicleModelViewModel> PageList(int? page, string searchStr, string currentFilter, string sortOrder)
+        {
+            int pageSize = 3;
+
+            int pageNumber = (page ?? 1);
+            var models = GetAll(sortOrder, searchStr);
+
+            return models.ToPagedList(pageNumber, pageSize);
         }
     }
 }

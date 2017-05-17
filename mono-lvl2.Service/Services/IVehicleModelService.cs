@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using mono_lvl2.Service.ViewModels;
+using PagedList;
 
 namespace mono_lvl2.Service.Services
 {
@@ -13,5 +14,6 @@ namespace mono_lvl2.Service.Services
         void Add(VehicleModelViewModel modelVM);
         VehicleModelViewModel Edit(VehicleModelViewModel makeVM);
         void Remove(Guid? id);
+        IPagedList<VehicleModelViewModel> PageList(int? page, string searchStr, string currentFilter, string sortOrder);
     }
 }

@@ -15,6 +15,7 @@ namespace mono_lvl2.Service
         void Add(VehicleMakeViewModel makeVM);
         VehicleMakeViewModel Edit(VehicleMakeViewModel makeVM);
         void Remove(Guid? id);
+        IPagedList<VehicleMakeViewModel> PageList(int? page, string searchStr, string currentFilter, string sortOrder);
         
     }
 }
