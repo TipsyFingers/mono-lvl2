@@ -20,28 +20,7 @@ namespace mono_lvl2.MVC.Controllers
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AbrvSortParm = sortOrder == "abrv" ? "abrv_desc" : "abrv";
-            var makes = from m in _service.GetAll() select m;
-
-            if (!String.IsNullOrEmpty(searchStr))                                           
-            {
-                makes = makes.Where(m => m.Name.Contains(searchStr));
-            }
-
-            switch (sortOrder)                                                              
-            {
-                case "name_desc":
-                    makes = makes.OrderByDescending(m => m.Name);
-                    break;
-                case "abrv":
-                    makes = makes.OrderBy(m => m.Abrv);
-                    break;
-                case "abrv_desc":
-                    makes = makes.OrderByDescending(m => m.Abrv);
-                    break;
-                default:
-                    makes = makes.OrderBy(m => m.Name);
-                    break;
-            }
+            var makes = _service.GetAll(sortOrder, searchStr);           
 
             return View(makes);
         }

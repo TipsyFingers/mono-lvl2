@@ -10,7 +10,7 @@ namespace mono_lvl2.Service
     public interface IVehicleMakeService
     {
         VehicleMakeViewModel Get(Guid? id);
-        IEnumerable<VehicleMakeViewModel> GetAll();
+        IEnumerable<VehicleMakeViewModel> GetAll(string sortOrder = "", string searchStr = "");
         void Add(VehicleMakeViewModel makeVM);
         VehicleMakeViewModel Edit(VehicleMakeViewModel makeVM);
         void Remove(Guid? id);

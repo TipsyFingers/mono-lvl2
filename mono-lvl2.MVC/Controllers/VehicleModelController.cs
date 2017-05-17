@@ -19,34 +19,7 @@ namespace mono_lvl2.MVC.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AbrvSortParm = sortOrder == "abrv" ? "abrv_desc" : "abrv";
             ViewBag.MakeSortParm = sortOrder == "make" ? "make_desc" : "make";
-            var models = from m in _serviceModel.GetAll() select m;
-
-            if (!String.IsNullOrEmpty(searchStr))                                          
-            {
-                models = models.Where(m => m.Name.Contains(searchStr));
-            }
-
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    models = models.OrderByDescending(m => m.Name);
-                    break;
-                case "abrv":
-                    models = models.OrderBy(m => m.Abrv);
-                    break;
-                case "abrv_desc":
-                    models = models.OrderByDescending(m => m.Abrv);
-                    break;
-                case "maker":
-                    models = models.OrderBy(m => m.Make.Name);
-                    break;
-                case "maker_desc":
-                    models = models.OrderByDescending(m => m.Make.Name);
-                    break;                
-                default:
-                    models = models.OrderBy(m => m.Name);
-                    break;
-            }
+            var models = _serviceModel.GetAll(sortOrder, searchStr);
 
             return View(models);
         }

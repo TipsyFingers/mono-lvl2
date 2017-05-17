@@ -33,10 +33,31 @@ namespace mono_lvl2.Service
             return Mapper.Map(vehicleMake, new VehicleMakeViewModel());
         }
 
-        public IEnumerable<VehicleMakeViewModel> GetAll()
+        public IEnumerable<VehicleMakeViewModel> GetAll(string sortOrder = "", string searchStr = "")
         {
             List<VehicleMake> data = _db.VehicleMake.ToList();
             List<VehicleMakeViewModel> output = Mapper.Map<List<VehicleMake>, List<VehicleMakeViewModel>>(data);
+
+            if (!String.IsNullOrEmpty(searchStr))
+            {
+                output = output.Where(m => m.Name.Contains(searchStr)).ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    output = output.OrderByDescending(m => m.Name).ToList();
+                    break;
+                case "abrv":
+                    output = output.OrderBy(m => m.Abrv).ToList();
+                    break;
+                case "abrv_desc":
+                    output = output.OrderByDescending(m => m.Abrv).ToList();
+                    break;
+                default:
+                    output = output.OrderBy(m => m.Name).ToList();
+                    break;                    
+            }
 
             return output;
         }

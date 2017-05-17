@@ -9,7 +9,7 @@ namespace mono_lvl2.Service.Services
     public interface IVehicleModelService
     {
         VehicleModelViewModel Get(Guid? id);
-        IEnumerable<VehicleModelViewModel> GetAll();
+        IEnumerable<VehicleModelViewModel> GetAll(string sortOrder = "", string searchStr = "");
         void Add(VehicleModelViewModel modelVM);
         VehicleModelViewModel Edit(VehicleModelViewModel makeVM);
         void Remove(Guid? id);
