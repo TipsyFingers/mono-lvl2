@@ -5,6 +5,7 @@ using System.Data.Entity.Migrations;
 using mono_lvl2.Service.ViewModels;
 using AutoMapper;
 
+
 namespace mono_lvl2.Service
 {
     public class VehicleMakeService : IVehicleMakeService

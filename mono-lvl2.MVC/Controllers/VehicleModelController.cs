@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
+using mono_lvl2.Service;
 using mono_lvl2.Service.Services;
 using mono_lvl2.Service.ViewModels;
-using mono_lvl2.Service;
-using System.Linq;
-using System.Data.Entity;
+using PagedList;
 
 namespace mono_lvl2.MVC.Controllers
 {
@@ -14,14 +13,29 @@ namespace mono_lvl2.MVC.Controllers
         private VehicleMakeService _serviceMake = new VehicleMakeService();
 
         // GET: VehicleModel
-        public ActionResult Index(string sortOrder, string searchStr)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchStr, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AbrvSortParm = sortOrder == "abrv" ? "abrv_desc" : "abrv";
             ViewBag.MakeSortParm = sortOrder == "make" ? "make_desc" : "make";
             var models = _serviceModel.GetAll(sortOrder, searchStr);
 
-            return View(models);
+            if (searchStr != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchStr = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchStr;
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(models.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: VehicleModel/Details/5

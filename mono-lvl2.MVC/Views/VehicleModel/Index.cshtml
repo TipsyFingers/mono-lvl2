@@ -1,9 +1,10 @@
-﻿@model IEnumerable<mono_lvl2.Service.ViewModels.VehicleModelViewModel>
+﻿@model PagedList.IPagedList<mono_lvl2.Service.ViewModels.VehicleModelViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
     SelectList makes = ViewBag.List;
-    var test = ViewBag.Test;
 }
 
 
@@ -13,10 +14,10 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "VehicleModel", FormMethod.Get))
 {
     <p>
-        Find by maker name: @Html.TextBox("searchStr")
+        Find by maker name: @Html.TextBox("searchStr", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
@@ -56,3 +57,7 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

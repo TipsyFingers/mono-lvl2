@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using mono_lvl2.Service;
 using mono_lvl2.Service.ViewModels;
+using PagedList;
 
 namespace mono_lvl2.MVC.Controllers
 {
@@ -16,13 +11,28 @@ namespace mono_lvl2.MVC.Controllers
         private VehicleMakeService _service = new VehicleMakeService();
 
         // GET: VehicleMake
-        public ActionResult Index(string sortOrder, string searchStr)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchStr, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AbrvSortParm = sortOrder == "abrv" ? "abrv_desc" : "abrv";
-            var makes = _service.GetAll(sortOrder, searchStr);           
+            var makes = _service.GetAll(sortOrder, searchStr);
 
-            return View(makes);
+            if(searchStr != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchStr = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchStr;
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(makes.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: VehicleMake/Details/5

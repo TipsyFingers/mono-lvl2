@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using mono_lvl2.Service.ViewModels;
+using PagedList;
 
 namespace mono_lvl2.Service
 {
@@ -14,5 +15,6 @@ namespace mono_lvl2.Service
         void Add(VehicleMakeViewModel makeVM);
         VehicleMakeViewModel Edit(VehicleMakeViewModel makeVM);
         void Remove(Guid? id);
+        
     }
 }
