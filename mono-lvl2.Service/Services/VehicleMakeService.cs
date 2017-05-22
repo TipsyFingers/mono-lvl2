@@ -34,7 +34,7 @@ namespace mono_lvl2.Service
             return Mapper.Map(vehicleMake, new VehicleMakeViewModel());
         }
 
-        public IEnumerable<VehicleMakeViewModel> GetAll(string sortOrder = "", string searchStr = "") // IQeriable
+        public IEnumerable<VehicleMakeViewModel> GetAll(string sortOrder = "", string searchStr = "") // IQueryable
         {
 
             IQueryable<VehicleMake> data;
@@ -106,7 +106,15 @@ namespace mono_lvl2.Service
                 throw new ArgumentNullException("Id is null");
             }
 
-            _db.VehicleMake.Remove(_db.VehicleMake.Where(m => m.Id == id).FirstOrDefault());
+            VehicleMake vehicleMake = _db.VehicleMake.Where(m => m.Id == id).FirstOrDefault();
+
+            if (vehicleMake == null)
+            {
+                throw new ArgumentNullException("Model is null");
+            }
+
+
+            _db.VehicleMake.Remove(vehicleMake);
             _db.SaveChanges();
         }
 

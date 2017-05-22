@@ -112,7 +112,14 @@ namespace mono_lvl2.Service.Services
                 throw new ArgumentNullException("Id is null");
             }
 
-            _db.VehicleModel.Remove(_db.VehicleModel.Where(m => m.Id == id).FirstOrDefault());
+            VehicleModel vehicleModel = _db.VehicleModel.Where(m => m.Id == id).FirstOrDefault();
+
+            if (vehicleModel == null)
+            {
+                throw new ArgumentNullException("Model is null");
+            }
+
+            _db.VehicleModel.Remove(vehicleModel);
             _db.SaveChanges();
         }
 
