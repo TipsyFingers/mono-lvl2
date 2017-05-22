@@ -10,11 +10,11 @@ namespace mono_lvl2.Service
 {
     public class VehicleMakeService : IVehicleMakeService
     {
-        private DbCont _db;
+        private MakeModelContext _db;
 
         public VehicleMakeService()
         {
-            _db = new DbCont();
+            _db = new MakeModelContext();
         }
 
         public VehicleMakeViewModel Get(Guid? id)
@@ -34,33 +34,35 @@ namespace mono_lvl2.Service
             return Mapper.Map(vehicleMake, new VehicleMakeViewModel());
         }
 
-        public IEnumerable<VehicleMakeViewModel> GetAll(string sortOrder = "", string searchStr = "")
+        public IEnumerable<VehicleMakeViewModel> GetAll(string sortOrder = "", string searchStr = "") // IQeriable
         {
-            List<VehicleMake> data = _db.VehicleMake.ToList();
-            List<VehicleMakeViewModel> output = Mapper.Map<List<VehicleMake>, List<VehicleMakeViewModel>>(data);
+
+            IQueryable<VehicleMake> data;
 
             if (!String.IsNullOrEmpty(searchStr))
             {
-                output = output.Where(m => m.Name.Contains(searchStr)).ToList();
+                data = _db.VehicleMake.Where(m => m.Name.Contains(searchStr));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    output = output.OrderByDescending(m => m.Name).ToList();
+                    data = _db.VehicleMake.OrderByDescending(m => m.Name);
                     break;
                 case "abrv":
-                    output = output.OrderBy(m => m.Abrv).ToList();
+                    data = _db.VehicleMake.OrderBy(m => m.Abrv);
                     break;
                 case "abrv_desc":
-                    output = output.OrderByDescending(m => m.Abrv).ToList();
+                    data = _db.VehicleMake.OrderByDescending(m => m.Abrv);
                     break;
                 default:
-                    output = output.OrderBy(m => m.Name).ToList();
+                    data = _db.VehicleMake.OrderBy(m => m.Name);
                     break;                    
             }
 
-            return output;
+            data.ToList();            
+
+            return Mapper.Map<IQueryable<VehicleMake>, IEnumerable<VehicleMakeViewModel>>(data);
         }
 
         public void Add(VehicleMakeViewModel makeVM)

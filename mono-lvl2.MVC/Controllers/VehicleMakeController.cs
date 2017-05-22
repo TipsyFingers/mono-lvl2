@@ -79,7 +79,7 @@ namespace mono_lvl2.MVC.Controllers
 
         // GET: VehicleMake/Delete/5
         public ActionResult Delete(Guid? id)
-        {
+        {//provjera
             return View(_service.Get(id));
         }
 
@@ -91,5 +91,7 @@ namespace mono_lvl2.MVC.Controllers
             _service.Remove(id);
             return RedirectToAction("Index");
         }
+
+
     }
 }

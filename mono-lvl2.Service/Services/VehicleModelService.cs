@@ -11,11 +11,11 @@ namespace mono_lvl2.Service.Services
 {
     public class VehicleModelService : IVehicleModelService
     {
-        private DbCont _db;
+        private MakeModelContext _db;
 
         public VehicleModelService()
         {
-            _db = new DbCont();
+            _db = new MakeModelContext();
         }
 
         public VehicleModelViewModel Get(Guid? id)
@@ -37,37 +37,38 @@ namespace mono_lvl2.Service.Services
 
         public IEnumerable<VehicleModelViewModel> GetAll(string sortOrder = "", string searchStr = "")
         {
-            List<VehicleModel> data = _db.VehicleModel.ToList();
-            List<VehicleModelViewModel> output = Mapper.Map<List<VehicleModel>, List<VehicleModelViewModel>>(data);
+            IQueryable<VehicleModel> data;
 
             if (!String.IsNullOrEmpty(searchStr))
             {
-                output = output.Where(m => m.Make.Name.Contains(searchStr)).ToList();
+                data = _db.VehicleModel.Where(m => m.Make.Name.Contains(searchStr));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    output = output.OrderByDescending(m => m.Name).ToList();
+                    data = _db.VehicleModel.OrderByDescending(m => m.Name);
                     break;
                 case "abrv":
-                    output = output.OrderBy(m => m.Abrv).ToList();
+                    data = _db.VehicleModel.OrderBy(m => m.Abrv);
                     break;
                 case "abrv_desc":
-                    output = output.OrderByDescending(m => m.Abrv).ToList();
+                    data = _db.VehicleModel.OrderByDescending(m => m.Abrv);
                     break;
                 case "make":
-                    output = output.OrderBy(m => m.Make.Name).ToList();
+                    data = _db.VehicleModel.OrderBy(m => m.Make.Name);
                     break;
                 case "make_desc":
-                    output = output.OrderByDescending(m => m.Make.Name).ToList();
+                    data = _db.VehicleModel.OrderByDescending(m => m.Make.Name);
                     break;
                 default:
-                    output = output.OrderBy(m => m.Name).ToList();
+                    data = _db.VehicleModel.OrderBy(m => m.Name);
                     break;
             }
 
-            return output;
+            data.ToList();
+
+            return Mapper.Map<IQueryable<VehicleModel>, IEnumerable<VehicleModelViewModel>>(data);
         }
 
         public void Add(VehicleModelViewModel modelVM)
