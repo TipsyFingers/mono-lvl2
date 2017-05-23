@@ -66,9 +66,7 @@ namespace mono_lvl2.Service.Services
                     break;
             }
 
-            data.ToList();
-
-            return Mapper.Map<IQueryable<VehicleModel>, IEnumerable<VehicleModelViewModel>>(data);
+            return Mapper.Map<List<VehicleModel>, IEnumerable<VehicleModelViewModel>>(data.ToList());
         }
 
         public void Add(VehicleModelViewModel modelVM)

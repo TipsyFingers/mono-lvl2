@@ -58,11 +58,9 @@ namespace mono_lvl2.Service
                 default:
                     data = _db.VehicleMake.OrderBy(m => m.Name);
                     break;                    
-            }
+            }            
 
-            data.ToList();            
-
-            return Mapper.Map<IQueryable<VehicleMake>, IEnumerable<VehicleMakeViewModel>>(data);
+            return Mapper.Map<List<VehicleMake>, IEnumerable<VehicleMakeViewModel>>(data.ToList());
         }
 
         public void Add(VehicleMakeViewModel makeVM)
